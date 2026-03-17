@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Log Watcher Live</title>
+</head>
+<body>
+    <h2> Live Log Watcher</h2>
+    <div id="logBox"> </div>
+
+    <script>
+        const logBox = document.getElementById('logBox');
+        // Connect to the WebSocket server
+        const ws = new WebSocket('ws://localhost:8080/logs');
+
+        // Connection opened
+        ws.onopen = () => {
+          console.log('Connected to web socket');
+        };
+
+        // Listen for messages
+        ws.onmessage = (event) => {
+          const message = document.createElement('div');
+          message.className = 'message';
+          message.textContent = event.data;
+          logBox.appendChild(message);
+        };
+    </script>
+</body>
+</html>
