@@ -23,6 +23,7 @@ public class LogWebSocketHandler implements WebSocketHandler {
         sessionSet.add(session);
 
         List<String> lastLogs = logReaderService.getLastNLines(10);
+
         for(String log : lastLogs){
             session.sendMessage(new TextMessage(log));
         }

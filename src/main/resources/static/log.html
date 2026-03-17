@@ -10,20 +10,26 @@
 
     <script>
         const logBox = document.getElementById('logBox');
-        // Connect to the WebSocket server
+
+        // WebSocket connection
         const ws = new WebSocket('ws://localhost:8080/logs');
 
-        // Connection opened
         ws.onopen = () => {
-          console.log('Connected to web socket');
+            console.log('Connected to WebSocket');
         };
 
-        // Listen for messages
         ws.onmessage = (event) => {
-          const message = document.createElement('div');
-          message.className = 'message';
-          message.textContent = event.data;
-          logBox.appendChild(message);
+            const message = document.createElement('div');
+            message.textContent = event.data;
+            logBox.appendChild(message);
+        };
+
+        ws.onerror = (err) => {
+            console.error('WebSocket error:', err);
+        };
+
+        ws.onclose = () => {
+            console.log('WebSocket connection closed');
         };
     </script>
 </body>

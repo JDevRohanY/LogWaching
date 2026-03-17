@@ -22,7 +22,7 @@ public class FileLogReader implements LogReader {
 
             int lineCount = 0;
             StringBuilder lineBuilder = new StringBuilder();
-            while (pointer > 0 && lineCount < n) {
+            while (pointer >= 0 && lineCount < n) {
                 file.seek(pointer);
                 char c = (char) file.read();
 
